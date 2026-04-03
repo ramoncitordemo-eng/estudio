@@ -41,20 +41,33 @@ function loadTopics(subjectId) {
         return;
     }
 
-    subject.topics.forEach(topic => {
+    let firstBtn = null;
+
+    subject.topics.forEach((topic, index) => {
         const btn = document.createElement('button');
         btn.className = 'topic-btn';
         btn.textContent = topic.name;
         btn.addEventListener('click', () => {
+            // Quitar active a otros botones de tema
+            document.querySelectorAll('.topic-btn').forEach(b => b.style.borderColor = 'var(--pastel-4)');
+            btn.style.borderColor = 'var(--primary)';
+
             // Mostrar contenido del tema seleccionado
             mainTabs.classList.remove('hidden');
             mainContent.classList.remove('hidden');
             
-            // Opcional: reiniciar a "Resumen Teórico" por defecto
+            // Reiniciar a "Resumen Teórico" por defecto
             document.querySelector('.tab-btn[data-target="resumen"]').click();
         });
         topicsList.appendChild(btn);
+        
+        if (index === 0) firstBtn = btn;
     });
+
+    // Auto-seleccionar el primer tema por defecto para no dejar la página vacía
+    if (firstBtn) {
+        firstBtn.click();
+    }
 }
 
 subjectBtns.forEach(btn => {
@@ -67,8 +80,6 @@ subjectBtns.forEach(btn => {
     });
 });
 
-// Cargar la primera por defecto
-loadTopics('matematicas');
 
 
 // --- DATOS DEL TEMA: PROPORCIONES ---
@@ -383,3 +394,6 @@ btnBorrarHistorial.addEventListener('click', () => {
         loadHistory();
     }
 });
+
+// Inicializar la aplicación con la primera asignatura por defecto
+loadTopics('matematicas');
