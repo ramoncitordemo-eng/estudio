@@ -3,169 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto de Matemáticas - Proporciones</title>
-    <meta name="description" content="Aprende sobre proporciones matemáticas de forma interactiva y divertida.">
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>Mi Escuela en Casa - Matemáticas</title>
+    <meta name="description" content="Aprende matemáticas en casa con resúmenes y exámenes interactivos.">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="app-background"></div>
-    
+
+    <!-- CABECERA -->
     <header class="main-header">
-        <div class="header-content">
-            <h1 class="bounce-in">🏫 Mi Escuela en Casa</h1>
-            
-            <div class="subjects-selector">
-                <button class="subject-btn active" data-subject="matematicas">📐 Matemáticas</button>
-                <button class="subject-btn" data-subject="naturales">🍃 Naturales</button>
-                <button class="subject-btn" data-subject="sociales">🌍 Sociales</button>
-                <button class="subject-btn" data-subject="ingles">🇬🇧 Inglés</button>
+        <h1>🏫 Mi Escuela en Casa</h1>
+
+        <!-- Selector de asignatura -->
+        <div class="subjects-bar">
+            <button class="subject-btn active" onclick="selectSubject(this, 'matematicas')">📐 Matemáticas</button>
+            <button class="subject-btn" onclick="selectSubject(this, 'naturales')">🍃 Naturales</button>
+            <button class="subject-btn" onclick="selectSubject(this, 'sociales')">🌍 Sociales</button>
+            <button class="subject-btn" onclick="selectSubject(this, 'ingles')">🇬🇧 Inglés</button>
+        </div>
+
+        <!-- Panel de temas (se rellena con JS) -->
+        <div class="topics-panel">
+            <p class="topics-label" id="topics-label">Elige un tema de Matemáticas:</p>
+            <div id="topics-list" class="topics-list">
+                <!-- JS rellena esto -->
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="container" id="main-content">
+
+        <!-- PANTALLA DE BIENVENIDA (visible por defecto) -->
+        <div id="screen-welcome" class="screen active">
+            <div class="welcome-box">
+                <div style="font-size:4rem;">🎓</div>
+                <h2>¡Bienvenido!</h2>
+                <p>Elige una asignatura arriba y luego pulsa en el tema que quieras estudiar.</p>
+                <p>Podrás repasar la teoría y hacer exámenes para practicar. ¡Mucho ánimo!</p>
+            </div>
+        </div>
+
+        <!-- PANTALLA DE UN TEMA -->
+        <div id="screen-topic" class="screen hidden">
+            <!-- PESTAÑAS -->
+            <div class="tab-bar">
+                <button class="tab-btn active" onclick="showTab('resumen')">📚 Resumen</button>
+                <button class="tab-btn" onclick="showTab('examen')">✍️ Examen</button>
+                <button class="tab-btn" onclick="showTab('historial')">🏆 Historial</button>
             </div>
 
-            <div class="topic-selector">
-                <h3 id="current-subject-title">Matemáticas</h3>
-                <div id="topics-list" class="topics-list">
-                    <!-- JS inyectará los temas aquí -->
+            <!-- PESTAÑA: RESUMEN -->
+            <div id="tab-resumen" class="tab-content active">
+                <div id="resumen-content">
+                    <!-- JS rellena el resumen del tema -->
+                </div>
+                <div style="text-align:center; margin-top:2rem;">
+                    <button class="btn-primary" onclick="showTab('examen'); window.scrollTo({top:0,behavior:'smooth'})">
+                        ✍️ ¡Empezar el Examen!
+                    </button>
+                </div>
+            </div>
+
+            <!-- PESTAÑA: EXAMEN -->
+            <div id="tab-examen" class="tab-content hidden">
+
+                <!-- Vista 1: Lista de exámenes -->
+                <div id="view-exam-list">
+                    <div class="quiz-header">
+                        <h3>📋 Elige un Examen</h3>
+                        <p>Aquí tienes todos los exámenes del tema. Completa cada uno para ver tu progreso.</p>
+                    </div>
+                    <div id="exam-cards-list" class="exam-cards-grid">
+                        <!-- JS rellena las tarjetas de examen -->
+                    </div>
+                </div>
+
+                <!-- Vista 2: Preguntas de un examen -->
+                <div id="view-exam-questions" style="display:none">
+                    <div style="margin-bottom:1.5rem;">
+                        <button class="btn-back" onclick="volverListaExamenes()">← Volver a los exámenes</button>
+                    </div>
+                    <div class="quiz-header">
+                        <h3 id="quiz-title">📝 Examen</h3>
+                        <p>Lee las preguntas y elige la respuesta. Puedes ayudarte de papel y lápiz.</p>
+                    </div>
+                    <form id="quiz-form" onsubmit="corregirExamen(event)">
+                        <div id="quiz-questions">
+                            <!-- JS rellena preguntas -->
+                        </div>
+                        <div class="quiz-actions">
+                            <button type="submit" id="btn-corregir" class="btn-primary">✅ Corregir Examen</button>
+                            <button type="button" id="btn-reintentar" class="btn-secondary" onclick="reintentar()" style="display:none">🔄 Repetir Examen</button>
+                        </div>
+                    </form>
+                    <div id="quiz-result" class="result-box" style="display:none"></div>
+                </div>
+
+            </div>
+
+            <!-- PESTAÑA: HISTORIAL -->
+            <div id="tab-historial" class="tab-content hidden">
+                <div class="history-header">
+                    <h3>🏆 Mis Intentos</h3>
+                    <p>Aquí puedes ver cómo has ido mejorando.</p>
+                </div>
+                <div id="historial-list"></div>
+                <div style="text-align:center; margin-top:1.5rem;">
+                    <button class="btn-danger" onclick="borrarHistorial()">🗑️ Borrar Historial</button>
                 </div>
             </div>
         </div>
-        
-        <nav class="nav-tabs hidden" id="main-nav-tabs">
-            <button class="tab-btn active" data-target="resumen">
-                <span class="emoji">📚</span> Resumen Teórico
-            </button>
-            <button class="tab-btn" data-target="examen">
-                <span class="emoji">✍️</span> Exámenes
-            </button>
-            <button class="tab-btn" data-target="historial">
-                <span class="emoji">🏆</span> Historial
-            </button>
-        </nav>
-    </header>
 
-    <main class="container hidden" id="main-content">
-        <!-- SECCIÓN: RESUMEN TEÓRICO -->
-        <section id="resumen" class="tab-content active fade-up">
-            <div class="intro-box">
-                ¡Hola! Bienvenido a tu clase interactiva. Aquí aprenderás todo sobre las proporciones, cómo calcularlas y sus usos increíbles en la vida diaria. ¡Repasa la teoría y luego ponte a prueba!
-            </div>
-
-            <div class="cards-grid">
-                <!-- Tarjeta 1 -->
-                <div class="card color-1">
-                    <h3>1. ¿Qué es una proporción numérica?</h3>
-                    <p>Es simplemente la <strong>igualdad entre dos razones</strong> (fracciones). Se lee "a es a b como c es a d".</p>
-                    <div class="formula">a/b = c/d</div>
-                </div>
-
-                <!-- Tarjeta 2 -->
-                <div class="card color-2">
-                    <h3>2. Propiedad fundamental</h3>
-                    <p>En cualquier proporción, si multiplicas en cruz (los extremos y los medios), el resultado es el mismo.</p>
-                    <div class="formula">a × d = b × c</div>
-                </div>
-
-                <!-- Tarjeta 3 -->
-                <div class="card color-3">
-                    <h3>3. ¿Cómo comparar magnitudes?</h3>
-                    <p>Podemos comparar cantidades viendo la relación entre ellas. Por ejemplo, por cada 2 niños, hay 3 niñas. Comparar es la base para encontrar proporciones.</p>
-                </div>
-
-                <!-- Tarjeta 4 -->
-                <div class="card color-4">
-                    <h3>4. Proporcionalidad directa</h3>
-                    <p>Dos magnitudes son directamente proporcionales si al <strong>duplicar</strong> una, la otra también <strong>se duplica</strong>. ¡Suben o bajan al mismo nivel!</p>
-                </div>
-
-                <!-- Tarjeta 5 -->
-                <div class="card color-5">
-                    <h3>5. Reducción a la unidad</h3>
-                    <p>Es un truco genial: primero calculas cuánto vale <strong>1 sola cosa</strong>, y luego multiplicas por la cantidad de cosas que realmente quieres saber.</p>
-                </div>
-
-                <!-- Tarjeta 6 -->
-                <div class="card color-1">
-                    <h3>6. Repartos directamente proporcionales</h3>
-                    <p>Significa repartir una cantidad dando más al que tiene una parte mayor. Ejemplo: repartir caramelos según las edades.</p>
-                </div>
-
-                <!-- Tarjeta 7 -->
-                <div class="card color-2">
-                    <h3>7. Porcentajes (%)</h3>
-                    <p>Un porcentaje es una fracción especial donde el denominador siempre es 100. El 25% significa "25 de cada 100".</p>
-                </div>
-
-                <!-- Tarjeta 8 -->
-                <div class="card color-3">
-                    <h3>8. Cálculo del porcentaje</h3>
-                    <p>Para calcular un % de una cantidad, multiplicas el número por el porcentaje y lo divides entre 100.</p>
-                    <div class="formula">20% de 50 = (20 × 50) / 100 = 10</div>
-                </div>
-
-                <!-- Tarjeta 9 -->
-                <div class="card color-4">
-                    <h3>9. Aumentos porcentuales</h3>
-                    <p>Cuando un precio sube un 10%, significa que ahora vale el 100% original + 10% extra, o sea, el <strong>110%</strong> del inicio.</p>
-                </div>
-
-                <!-- Tarjeta 10 -->
-                <div class="card color-5">
-                    <h3>10. Disminuciones porcentuales</h3>
-                    <p>Son los famosos "descuentos". Si te rebajan el 20%, solo vas a pagar el 100% - 20% = <strong>80%</strong> del precio original.</p>
-                </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 3rem;">
-                <button class="btn-primary bounce-in" onclick="document.querySelector('.tab-btn[data-target=\'examen\']').click(); window.scrollTo({top:0, behavior:'smooth'});">
-                    ➡️ ¡Ya he repasado, ir al Examen!
-                </button>
-            </div>
-        </section>
-
-        <!-- SECCIÓN: EXAMEN -->
-        <section id="examen" class="tab-content hidden fade-up">
-            <div class="quiz-header">
-                <h3>📝 Examen: Proporciones (10 Preguntas)</h3>
-                <p>Lee cada pregunta con atención. Puedes hacer las operaciones en una hoja de papel aparte y luego elegir la respuesta correcta.</p>
-            </div>
-            
-            <form id="quiz-form">
-                <div id="quiz-container">
-                    <!-- Las preguntas se generarán con JavaScript -->
-                </div>
-                
-                <div class="quiz-actions">
-                    <button type="submit" id="btn-corregir" class="btn-primary bounce-hover">
-                        <span class="icon">✅</span> Corregir Examen
-                    </button>
-                    <button type="button" id="btn-reintentar" class="btn-secondary hidden bounce-hover">
-                        <span class="icon">🔄</span> Volver a intentar
-                    </button>
-                </div>
-            </form>
-
-            <div id="quiz-result" class="result-box hidden scale-in">
-                <!-- Se inyecta nota -->
-            </div>
-        </section>
-
-        <!-- SECCIÓN: HISTORIAL -->
-        <section id="historial" class="tab-content hidden fade-up">
-            <div class="history-header">
-                <h3>Tus Intentos Anteriores 🏆</h3>
-                <p>Aquí puedes ver tu progreso para ver cómo vas mejorando.</p>
-            </div>
-            
-            <div id="historial-container" class="history-grid">
-                <!-- El historial se genera de JS -->
-            </div>
-            
-            <div class="history-actions">
-                <button id="btn-borrar-historial" class="btn-danger bounce-hover">
-                    <span class="icon">🗑️</span> Borrar Historial
-                </button>
-            </div>
-        </section>
     </main>
 
     <footer class="main-footer">
