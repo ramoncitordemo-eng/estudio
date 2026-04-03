@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto de Matemáticas - Proporciones</title>
+    <meta name="description" content="Aprende sobre proporciones matemáticas de forma interactiva y divertida.">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-background"></div>
+    
+    <header class="main-header">
+        <div class="header-content">
+            <h1 class="bounce-in">🏫 Mi Escuela en Casa</h1>
+            
+            <div class="subjects-selector">
+                <button class="subject-btn active" data-subject="matematicas">📐 Matemáticas</button>
+                <button class="subject-btn" data-subject="naturales">🍃 Naturales</button>
+                <button class="subject-btn" data-subject="sociales">🌍 Sociales</button>
+                <button class="subject-btn" data-subject="ingles">🇬🇧 Inglés</button>
+            </div>
+
+            <div class="topic-selector">
+                <h3 id="current-subject-title">Matemáticas</h3>
+                <div id="topics-list" class="topics-list">
+                    <!-- JS inyectará los temas aquí -->
+                </div>
+            </div>
+        </div>
+        
+        <nav class="nav-tabs hidden" id="main-nav-tabs">
+            <button class="tab-btn active" data-target="resumen">
+                <span class="emoji">📚</span> Resumen Teórico
+            </button>
+            <button class="tab-btn" data-target="examen">
+                <span class="emoji">✍️</span> Exámenes
+            </button>
+            <button class="tab-btn" data-target="historial">
+                <span class="emoji">🏆</span> Historial
+            </button>
+        </nav>
+    </header>
+
+    <main class="container hidden" id="main-content">
+        <!-- SECCIÓN: RESUMEN TEÓRICO -->
+        <section id="resumen" class="tab-content active fade-up">
+            <div class="intro-box">
+                ¡Hola! Bienvenido a tu clase interactiva. Aquí aprenderás todo sobre las proporciones, cómo calcularlas y sus usos increíbles en la vida diaria. ¡Repasa la teoría y luego ponte a prueba!
+            </div>
+
+            <div class="cards-grid">
+                <!-- Tarjeta 1 -->
+                <div class="card color-1">
+                    <h3>1. ¿Qué es una proporción numérica?</h3>
+                    <p>Es simplemente la <strong>igualdad entre dos razones</strong> (fracciones). Se lee "a es a b como c es a d".</p>
+                    <div class="formula">a/b = c/d</div>
+                </div>
+
+                <!-- Tarjeta 2 -->
+                <div class="card color-2">
+                    <h3>2. Propiedad fundamental</h3>
+                    <p>En cualquier proporción, si multiplicas en cruz (los extremos y los medios), el resultado es el mismo.</p>
+                    <div class="formula">a × d = b × c</div>
+                </div>
+
+                <!-- Tarjeta 3 -->
+                <div class="card color-3">
+                    <h3>3. ¿Cómo comparar magnitudes?</h3>
+                    <p>Podemos comparar cantidades viendo la relación entre ellas. Por ejemplo, por cada 2 niños, hay 3 niñas. Comparar es la base para encontrar proporciones.</p>
+                </div>
+
+                <!-- Tarjeta 4 -->
+                <div class="card color-4">
+                    <h3>4. Proporcionalidad directa</h3>
+                    <p>Dos magnitudes son directamente proporcionales si al <strong>duplicar</strong> una, la otra también <strong>se duplica</strong>. ¡Suben o bajan al mismo nivel!</p>
+                </div>
+
+                <!-- Tarjeta 5 -->
+                <div class="card color-5">
+                    <h3>5. Reducción a la unidad</h3>
+                    <p>Es un truco genial: primero calculas cuánto vale <strong>1 sola cosa</strong>, y luego multiplicas por la cantidad de cosas que realmente quieres saber.</p>
+                </div>
+
+                <!-- Tarjeta 6 -->
+                <div class="card color-1">
+                    <h3>6. Repartos directamente proporcionales</h3>
+                    <p>Significa repartir una cantidad dando más al que tiene una parte mayor. Ejemplo: repartir caramelos según las edades.</p>
+                </div>
+
+                <!-- Tarjeta 7 -->
+                <div class="card color-2">
+                    <h3>7. Porcentajes (%)</h3>
+                    <p>Un porcentaje es una fracción especial donde el denominador siempre es 100. El 25% significa "25 de cada 100".</p>
+                </div>
+
+                <!-- Tarjeta 8 -->
+                <div class="card color-3">
+                    <h3>8. Cálculo del porcentaje</h3>
+                    <p>Para calcular un % de una cantidad, multiplicas el número por el porcentaje y lo divides entre 100.</p>
+                    <div class="formula">20% de 50 = (20 × 50) / 100 = 10</div>
+                </div>
+
+                <!-- Tarjeta 9 -->
+                <div class="card color-4">
+                    <h3>9. Aumentos porcentuales</h3>
+                    <p>Cuando un precio sube un 10%, significa que ahora vale el 100% original + 10% extra, o sea, el <strong>110%</strong> del inicio.</p>
+                </div>
+
+                <!-- Tarjeta 10 -->
+                <div class="card color-5">
+                    <h3>10. Disminuciones porcentuales</h3>
+                    <p>Son los famosos "descuentos". Si te rebajan el 20%, solo vas a pagar el 100% - 20% = <strong>80%</strong> del precio original.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: EXAMEN -->
+        <section id="examen" class="tab-content hidden fade-up">
+            <div class="quiz-header">
+                <h3>📝 Examen: Proporciones (10 Preguntas)</h3>
+                <p>Lee cada pregunta con atención. Puedes hacer las operaciones en una hoja de papel aparte y luego elegir la respuesta correcta.</p>
+            </div>
+            
+            <form id="quiz-form">
+                <div id="quiz-container">
+                    <!-- Las preguntas se generarán con JavaScript -->
+                </div>
+                
+                <div class="quiz-actions">
+                    <button type="submit" id="btn-corregir" class="btn-primary bounce-hover">
+                        <span class="icon">✅</span> Corregir Examen
+                    </button>
+                    <button type="button" id="btn-reintentar" class="btn-secondary hidden bounce-hover">
+                        <span class="icon">🔄</span> Volver a intentar
+                    </button>
+                </div>
+            </form>
+
+            <div id="quiz-result" class="result-box hidden scale-in">
+                <!-- Se inyecta nota -->
+            </div>
+        </section>
+
+        <!-- SECCIÓN: HISTORIAL -->
+        <section id="historial" class="tab-content hidden fade-up">
+            <div class="history-header">
+                <h3>Tus Intentos Anteriores 🏆</h3>
+                <p>Aquí puedes ver tu progreso para ver cómo vas mejorando.</p>
+            </div>
+            
+            <div id="historial-container" class="history-grid">
+                <!-- El historial se genera de JS -->
+            </div>
+            
+            <div class="history-actions">
+                <button id="btn-borrar-historial" class="btn-danger bounce-hover">
+                    <span class="icon">🗑️</span> Borrar Historial
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>Hecho con ❤️ para aprender matemáticas divirtiéndose</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
